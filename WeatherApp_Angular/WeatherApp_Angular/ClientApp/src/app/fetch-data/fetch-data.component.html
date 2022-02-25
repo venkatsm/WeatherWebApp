@@ -1,0 +1,45 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!weatherInfo"><em>Loading...</em></p>
+<div *ngIf="weatherInfo">
+  <h3>Region: {{weatherInfo.region}}</h3>
+  <p><b>Current Conditions</b></p>
+  <div class="row">
+    <div class="col-md-3 col-lg-3">
+      <ul>
+        <li>Time: {{weatherInfo.currentConditions.dayHour}}</li>
+        <li>Temperature: {{weatherInfo.currentConditions.temp.c}}&deg;C ({{weatherInfo.currentConditions.temp.f}}&deg;F) </li>
+        <li>Precip: {{weatherInfo.currentConditions.precip}}</li>
+        <li>Humidity : {{weatherInfo.currentConditions.humidity}}</li>
+        <li>Wind: {{weatherInfo.currentConditions.wind.km}} KM, ({{weatherInfo.currentConditions.wind.mile}} Mile)</li>
+      </ul>
+    </div>
+    <div align="center" class="col-md-3 col-lg-3">
+      <img src="{{weatherInfo.currentConditions.iconURL}}" style="width: 150px;height:150px;" />
+    </div>
+  </div>
+  
+  
+</div>
+<div class="table-responsive">
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="weatherInfo">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Min Temperature</th>
+        <th>Max Temperature</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr scope="row" *ngFor="let forecast of weatherInfo.next_Days">
+        <td>{{ forecast.date }}</td>
+        <td>{{ forecast.minTemperature }}</td>
+        <td>{{ forecast.maxTemperature }}</td>
+        <td>{{ forecast.summary }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
